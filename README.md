@@ -1,7 +1,7 @@
-#Requirements
+# Requirements
 - docker (for Windows and MacOS https://www.docker.com/products/docker-desktop)
 
-#Installation
+# Installation
 1. Generate vendor files
 ```
 docker run --rm \
