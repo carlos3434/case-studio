@@ -17,3 +17,20 @@ docker run --rm \
 ```
 ./vendor/bin/sail up
 ```
+
+
+3. dev
+
+php artisan make:migration create_employees_table
+php artisan run migrate
+php artisan make:seeder EmployeeSeeder
+
+composer require laravel/breeze --dev
+
+php artisan breeze:install vue
+npm install
+npm run dev
+php artisan migrate
+
+php artisan breeze:install api
+php artisan migrate
