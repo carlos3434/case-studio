@@ -22,7 +22,7 @@ class EmployeeSeeder extends Seeder
             if (!$firstline) {
                 Employee::create([
                     'employee_id' => $data['0'],
-                    'name_refix' => $data['1'],
+                    'name_prefix' => $data['1'],
                     'first_name' => $data['2'],
                     'middle_initial' => $data['3'],
                     'last_name' => $data['4'],

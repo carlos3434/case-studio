@@ -24,6 +24,7 @@ docker run --rm \
 php artisan make:migration create_employees_table
 php artisan run migrate
 php artisan make:seeder EmployeeSeeder
+php artisan db:seed --class=EmployeeSeeder
 
 composer require laravel/breeze --dev
 
@@ -32,5 +33,23 @@ npm install
 npm run dev
 php artisan migrate
 
-php artisan breeze:install api
+#php artisan breeze:install api
+#php artisan migrate
+
+##roles
+
+composer require spatie/laravel-permission
+
+#add repo in config/app.php
+
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+#test
+
+php artisan make:test EmployeeTest
+
+./vendor/bin/phpunit
+
+composer require laravel/passport
 php artisan migrate
+php artisan passport:install
