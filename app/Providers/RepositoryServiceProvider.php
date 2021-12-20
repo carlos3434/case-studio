@@ -4,12 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-//Settings
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserInterface;
-use App\Repositories\Employee\EmployeeRepository;
-use App\Repositories\Employee\EmployeeInterface;
-
 
 use App\Repositories\AbstractRepository;
 use App\Repositories\RepositoryInterface;
@@ -25,7 +21,6 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         //Auth
         $this->app->bind( UserInterface::class , UserRepository::class );
-        $this->app->bind( EmployeeInterface::class , EmployeeRepository::class );
 
         //abstract
         $this->app->bind( RepositoryInterface::class, AbstractRepository::class );

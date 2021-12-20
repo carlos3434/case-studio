@@ -17,6 +17,24 @@
                                 <label for="title">first_name</label>
                                 <input
                                     type="text"
+                                    v-model="form.user_id"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                            </div>
+                            <div>
+                                <label for="title">first_name</label>
+                                <input
+                                    type="text"
                                     v-model="form.first_name"
                                     class="
                                         w-full
@@ -49,21 +67,6 @@
                                     "
                                 />
                             </div>
-
-                            <!-- submit -->
-                            <div class="flex items-center mt-4">
-                                <button
-                                    class="
-                                        px-6
-                                        py-2
-                                        text-white
-                                        bg-gray-900
-                                        rounded
-                                    "
-                                >
-                                    Save
-                                </button>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -83,34 +86,34 @@ export default {
     },
     setup(props) {
         const form = useForm({
-            employee_id: props.employee.employee_id,
-            name_prefix: props.employee.name_prefix,
-            first_name: props.employee.first_name,
-            middle_initial: props.employee.middle_initial,
-            last_name: props.employee.last_name,
-            gender: props.employee.gender,
-            email: props.employee.email,
-            fathers_name: props.employee.fathers_name,
-            mothers_name: props.employee.mothers_name,
-            mothers_maiden_name: props.employee.mothers_maiden_name,
-            date_of_birth: props.employee.date_of_birth,
-            date_of_joining: props.employee.date_of_joining,
-            salary: props.employee.salary,
-            ssn: props.employee.ssn,
-            phone: props.employee.phone,
-            city: props.employee.city,
-            state: props.employee.state,
-            zip: props.employee.zip
+            user_id: props.user.user_id,
+            name_prefix: props.user.name_prefix,
+            first_name: props.user.first_name,
+            middle_initial: props.user.middle_initial,
+            last_name: props.user.last_name,
+            gender: props.user.gender,
+            email: props.user.email,
+            fathers_name: props.user.fathers_name,
+            mothers_name: props.user.mothers_name,
+            mothers_maiden_name: props.user.mothers_maiden_name,
+            date_of_birth: props.user.date_of_birth,
+            date_of_joining: props.user.date_of_joining,
+            salary: props.user.salary,
+            ssn: props.user.ssn,
+            phone: props.user.phone,
+            city: props.user.city,
+            state: props.user.state,
+            zip: props.user.zip
         });
 
         return { form };
     },
     props: {
-        employee: Object,
+        user: Object,
     },
     methods: {
         submit() {
-            this.form.put(route("employees.update", this.employee.id));
+            this.form.put(route("users.update", this.user.id));
         },
     },
 };

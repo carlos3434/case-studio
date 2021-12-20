@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +30,6 @@ Route::get('/dashboard', function () {
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('users', UserController::class);
-    Route::resource('employees', EmployeeController::class);
-
 });
 
 

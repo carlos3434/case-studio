@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Employee;
-class EmployeeSeeder extends Seeder
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,15 +15,20 @@ class EmployeeSeeder extends Seeder
      */
     public function run()
     {
-        Employee::truncate();
-  
+        User::truncate();
+        $admin = Role::where('name','admin')->first();
+        $manager = Role::where('name','manager')->first();
+        $standar = Role::where('name','standar')->first();
+
         $csvFile = fopen(base_path("employee_data.csv"), "r");
   
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
-                Employee::create([
-                    'employee_id' => $data['0'],
+                $user = User::create([
+                    'name' => $data['2'].' '.$data['4'],
+                    'password' => bcrypt('12345678'),
+                    'user_id' => $data['0'],
                     'name_prefix' => $data['1'],
                     'first_name' => $data['2'],
                     'middle_initial' => $data['3'],
@@ -39,11 +46,26 @@ class EmployeeSeeder extends Seeder
                     'city' => $data['15'],
                     'state' => $data['16'],
                     'zip' => $data['17'],
-                ]);    
+                ]);
+                $user->assignRole($standar);
             }
             $firstline = false;
         }
    
         fclose($csvFile);
+
+        $user = User::create([
+            'name' => 'admin user',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123456'),
+        ]);
+        $user->assignRole('admin');
+
+        $user = User::create([
+            'name' => 'manager user',
+            'email' => 'manager@gmail.com',
+            'password' => bcrypt('123456'),
+        ]);
+        $user->assignRole('manager');
     }
 }

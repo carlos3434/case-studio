@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +28,8 @@ Route::prefix('v1')->group(function(){
     Route::post('/login', [AuthController::class, 'login']);
 
     Route::group(['middleware' => 'auth_passport:api'], function(){
-
         Route::get('getUser', [AuthController::class, 'getUser']);
         Route::post('logout', [AuthController::class, 'logout']);
-
-        Route::post('employees', [EmployeeController::class, 'store']);
-/*
-        Route::apiResources([
-            'employees' => EmployeeController::class
-        ]);*/
-
-        //Route::apiResource(['employees'=>EmployeeController::class]);
+        Route::apiResource('users', UserController::class);
     });
 });

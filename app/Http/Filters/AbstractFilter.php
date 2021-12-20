@@ -58,49 +58,5 @@ abstract class AbstractFilter
             )
         );
     }
-    /*
-    public function where($field, $arg)
-    {
-        return $this->builder->where($field, $arg);
-    }
-    public function with($arg)
-    {
-        $this->builder->with($arg);
-        return $this;
-    }
-    public function join($table, $alias, $operation, $aliasJoin)
-    {
-        return $this->builder->join($table, $alias, $operation, $aliasJoin);
-    }
-    public function rightJoin($table, $alias, $operation, $aliasJoin)
-    {
-        return $this->builder->rightJoin($table, $alias, $operation, $aliasJoin);
-    }
-    public function select($select)
-    {
-        return $this->builder->select($select);
-    }
-    public function leftJoin($table, $alias, $operation, $aliasJoin)
-    {
-        return $this->builder->leftJoin($table, $alias, $operation, $aliasJoin);
-    }
-
-    public function first()
-    {
-        return $this->builder->first();
-    }
-    public function get()
-    {
-        return $this->builder->get();
-    }
-    public function count()
-    {
-        return $this->builder->count();
-    }
-
-    public function toSql()
-    {
-        return $this->builder->toSql();
-    }*/
 
 }

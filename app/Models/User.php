@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Http\Filters\User\UserFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -20,8 +22,26 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
         'password',
+
+        'user_id',
+        'name_prefix',
+        'first_name',
+        'middle_initial',
+        'last_name',
+        'gender',
+        'email',
+        'fathers_name',
+        'mothers_name',
+        'mothers_maiden_name',
+        'date_of_birth',
+        'date_of_joining',
+        'salary',
+        'ssn',
+        'phone',
+        'city',
+        'state',
+        'zip'
     ];
 
     /**
@@ -42,4 +62,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeFilter(Builder $builder, $request)
+    {
+        return (new UserFilter($request))->filter($builder);
+    }
 }

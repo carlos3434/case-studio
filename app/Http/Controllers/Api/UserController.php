@@ -3,17 +3,17 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
-use App\Http\Requests\EmployeeRequest;
-use App\Repositories\Employee\EmployeeInterface;
+use App\Models\User;
+use App\Http\Requests\UserRequest;
+use App\Repositories\User\UserInterface;
 
-class EmployeeController extends Controller
+class UserController extends Controller
 {
-    private $employeeRepository;
+    private $userRepository;
 
-    public function __construct(EmployeeInterface $employeeRepository)
+    public function __construct(UserInterface $userRepository)
     {
-        $this->employeeRepository = $employeeRepository;
+        $this->userRepository = $userRepository;
         $this->middleware(['role:manager|admin|standar'])->only(['index']);
         $this->middleware(['role:manager|admin'])->only(['store','show', 'update','destroy']);
     }
@@ -25,7 +25,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->employeeRepository->all($request);
+        return $this->userRepository->all($request);
     }
     /**
      * Store a newly created resource in storage.
@@ -33,10 +33,10 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EmployeeRequest $request)
+    public function store(UserRequest $request)
     {
-        $employee = $this->employeeRepository->create( $request->all() );
-        return response()->json($employee, 201);
+        $user = $this->userRepository->create( $request->all() );
+        return response()->json($user, 201);
     }
     /**
      * Display the specified resource.
@@ -44,31 +44,31 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show(User $user)
     {
-        return $this->employeeRepository->getOne($employee);
+        return $this->userRepository->getOne($user);
     }
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeRequest $request, Employee $employee )
+    public function update(UserRequest $request, User $user )
     {
-        $employee->update($request->all());
-        return response()->json($employee, 200);
+        $user = $this->userRepository->updateOne( $fields, $user );
+        return response()->json($user, 200);
     }
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employee  $employee
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(User $user)
     {
-        $this->employeeRepository->deleteOne($employee);
+        $this->userRepository->deleteOne($user);
         return response()->json(null, 204);
     }
 }

@@ -21,6 +21,26 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->unsignedInteger('user_id')->nullable();
+            $table->string('name_prefix')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('middle_initial')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('gender',1)->nullable();
+            $table->string('fathers_name')->nullable();
+            $table->string('mothers_name')->nullable();
+            $table->string('mothers_maiden_name')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->date('date_of_joining')->nullable();
+            $table->unsignedDouble('salary')->nullable();
+            $table->string('ssn')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('city',50)->nullable();
+            $table->string('state',2)->nullable();
+            $table->unsignedMediumInteger('zip')->nullable();
+
+
         });
     }
 

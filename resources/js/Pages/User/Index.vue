@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <input type="search" v-model="params.search" aria-label="Search" placeholder="Search..." class="block w-full rounded-md border-gray-300 shadow-sm">
+                            <input type="search" v-model="params.name" aria-label="Search" placeholder="Search..." class="block w-full rounded-md border-gray-300 shadow-sm">
                         </div>
 
                         <table>
@@ -40,11 +40,11 @@
                                 
                                     <span class="inline-flex py-3 px-6 w-full justify-between" @click="sort('name')">name
 
-                                        <svg v-if="params.field === 'name' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <svg v-if="params.sortBy === 'name' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                           <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
                                         </svg>
 
-                                        <svg v-if="params.field === 'name' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <svg v-if="params.sortBy === 'name' && params.direction === 'desc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                           <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
                                         </svg>
                                     </span>
@@ -56,7 +56,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="user in users.data" :key="user.id">
-                                    <td class="px-4 py-2">{{ user.id }}</td>
+                                    <td class="px-4 py-2">{{ user.user_id }}</td>
                                     <td class="px-4 py-2">{{ user.name }}</td>
                                     <td class="px-4 py-2">{{ user.email }}</td>
                                     <td class="px-4 py-2 font-extrabold">
@@ -83,7 +83,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <pagination class="mt-6" :links="users.links" />
+                        <pagination class="mt-6" :links="users.meta.links" />
                     </div>
                 </div>
             </div>
@@ -113,15 +113,15 @@ export default {
     data(){
         return {
             params:{
-                search: this.filters.search,
-                field: this.filters.field,
+                name: this.filters.name,
+                sortBy: this.filters.sortBy,
                 direction: this.filters.direction,
             },
         };
     },
     methods: {
-        sort(field) {
-          this.params.field = field;
+        sort(sortBy) {
+          this.params.sortBy = sortBy;
           this.params.direction = this.params.direction === 'asc' ? 'desc' : 'asc';
         },
     },

@@ -5,43 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 use App\Http\Requests\UserRequest;
 use Spatie\Permission\Models\Role;
+use App\Repositories\User\UserInterface;
 
 class UserController extends Controller
 {
 
-    public function __construct()
+    private $userRepository;
+
+    public function __construct(UserInterface $userRepository)
     {
-        $this->middleware(['role:admin|standar'])->only(['index']);
-        $this->middleware(['role:admin'])->only(['create','store','show','edit','update','destroy']);
+        $this->userRepository = $userRepository;
+        $this->middleware(['role:manager|admin|standar'])->only(['index']);
+        $this->middleware(['role:manager|admin'])->only(['store','show', 'update','destroy']);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = User::query();
-        if(request('search')){
-            $query->where('name','LIKE','%'.request('search').'%');
-        }
-        
-        if (request()->has(['field', 'direction'])) {
-            $query->orderBy(request('field'), request('direction'));
-        } else {
-            $query->orderBy('name', 'asc');
-        }
-        $users = $query->paginate(10);
-
         return Inertia::render('User/Index', [
-            'users' => $query->paginate()->withQueryString(),
-            'filters' => request()->all(['search', 'field', 'direction'])
+            'users' => $this->userRepository->all($request),
+            'filters' => request()->all(['name', 'sortBy', 'direction'])
         ]);
 
 
@@ -65,13 +56,13 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $fields = $request->only(['name','email']);
-        $fields['password'] = bcrypt( $request->get('password') );
-        $user = User::create($fields);
-
-        if ($request->has('role_selected')) {//string
-            $user->syncRoles( $request->get('role_selected') );
+        $fields = $request->all();
+        if ($request->has('password')) {
+            $fields['password'] = bcrypt( $request->get('password') );
         }
+        $user = $this->userRepository->create( $request->all() );
+        $this->userRepository->syncRolesAndPermissions( $request, $user );
+
         return Redirect::route('users.index');
     }
 
@@ -109,15 +100,13 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
 
-        $fields = $request->only(['name','email']);
+        $fields = $request->all();
         if ($request->has('password')) {
             $fields['password'] = bcrypt( $request->get('password') );
         }
+        $user = $this->userRepository->updateOne( $fields, $user );
+        $this->userRepository->syncRolesAndPermissions( $request, $user );
 
-        if ($request->has('role_selected')) {//string
-            $user->syncRoles( $request->get('role_selected') );
-        }
-        $user->update($fields);
         return Redirect::route('users.index');
     }
 
@@ -129,7 +118,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        $this->userRepository->deleteOne($user);
         return Redirect::route('users.index');
     }
 }

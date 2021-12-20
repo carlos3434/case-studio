@@ -13,6 +13,7 @@
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="submit">
+
                             <div>
                                 <label for="title">name</label>
                                 <input
@@ -30,12 +31,33 @@
                                         focus:ring-blue-600
                                     "
                                 />
+                                <div v-if="errors.name">The name is Required</div>
                             </div>
                             <div>
                                 <label for="title">email</label>
                                 <input
                                     type="text"
                                     v-model="form.email"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.email">The user_id is Required</div>
+                            </div>
+
+                            <div>
+                                <label for="title">password</label>
+                                <input
+                                    type="password"
+                                    v-model="form.password"
                                     class="
                                         w-full
                                         px-4
@@ -57,11 +79,12 @@
                                     </option>
                                 </select>
                             </div>
+
                             <div>
-                                <label for="title">password</label>
+                                <label for="title">user_id</label>
                                 <input
-                                    type="password"
-                                    v-model="form.password"
+                                    type="text"
+                                    v-model="form.user_id"
                                     class="
                                         w-full
                                         px-4
@@ -74,6 +97,348 @@
                                         focus:ring-blue-600
                                     "
                                 />
+                                <div v-if="errors.user_id">The user_id is Required</div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label for="title">name_prefix</label>
+                                <input
+                                    type="text"
+                                    v-model="form.name_prefix"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.name_prefix">The name_prefix is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">first_name</label>
+                                <input
+                                    type="text"
+                                    v-model="form.first_name"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.first_name">The first_name is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">middle_initial</label>
+                                <input
+                                    type="text"
+                                    v-model="form.middle_initial"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.middle_initial">The middle_initial is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">last_name</label>
+                                <input
+                                    type="text"
+                                    v-model="form.last_name"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.last_name">The last_name is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">gender</label>
+                                <input
+                                    type="text"
+                                    v-model="form.gender"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.gender">The gender is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">email</label>
+                                <input
+                                    type="text"
+                                    v-model="form.email"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.email">The email is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">fathers_name</label>
+                                <input
+                                    type="text"
+                                    v-model="form.fathers_name"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.fathers_name">The fathers_name is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">mothers_name</label>
+                                <input
+                                    type="text"
+                                    v-model="form.mothers_name"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.mothers_name">The mothers_name is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">mothers_maiden_name</label>
+                                <input
+                                    type="text"
+                                    v-model="form.mothers_maiden_name"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.mothers_maiden_name">The mothers_maiden_name is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">date_of_birth</label>
+                                <input
+                                    type="text"
+                                    v-model="form.date_of_birth"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.date_of_birth">The date_of_birth is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">date_of_joining</label>
+                                <input
+                                    type="text"
+                                    v-model="form.date_of_joining"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.date_of_joining">The date_of_joining is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">salary</label>
+                                <input
+                                    type="text"
+                                    v-model="form.salary"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.salary">The salary is Required</div>
+                            </div>
+
+                            
+                            <div class="mt-4">
+                                <label for="title">ssn</label>
+                                <input
+                                    type="text"
+                                    v-model="form.ssn"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.ssn">The ssn is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">phone</label>
+                                <input
+                                    type="text"
+                                    v-model="form.phone"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.phone">The phone is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">city</label>
+                                <input
+                                    type="text"
+                                    v-model="form.city"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.city">The city is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">state</label>
+                                <input
+                                    type="text"
+                                    v-model="form.state"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.state">The state is Required</div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="title">zip</label>
+                                <input
+                                    type="text"
+                                    v-model="form.zip"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.zip">El zip es Required</div>
                             </div>
 
                             <!-- submit -->
@@ -112,7 +477,25 @@ export default {
             name: props.user.name,
             email: props.user.email,
             role_selected: props.role_selected,
-            password: props.user.password
+
+            password: props.user.password,
+            user_id: props.user.user_id,
+            name_prefix: props.user.name_prefix,
+            first_name: props.user.first_name,
+            middle_initial: props.user.middle_initial,
+            last_name: props.user.last_name,
+            gender: props.user.gender,
+            fathers_name: props.user.fathers_name,
+            mothers_name: props.user.mothers_name,
+            mothers_maiden_name: props.user.mothers_maiden_name,
+            date_of_birth: props.user.date_of_birth,
+            date_of_joining: props.user.date_of_joining,
+            salary: props.user.salary,
+            ssn: props.user.ssn,
+            phone: props.user.phone,
+            city: props.user.city,
+            state: props.user.state,
+            zip: props.user.zip
         });
 
         return { form };
@@ -120,6 +503,7 @@ export default {
     props: {
         user: Object,
         role_selected: '',
+        errors: Object,
         roles: [],
     },
     methods: {

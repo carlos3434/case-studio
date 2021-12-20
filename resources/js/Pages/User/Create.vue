@@ -13,11 +13,12 @@
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="submit">
+
                             <div>
-                                <label for="title">employee_id</label>
+                                <label for="title">name</label>
                                 <input
                                     type="text"
-                                    v-model="form.employee_id"
+                                    v-model="form.name"
                                     class="
                                         w-full
                                         px-4
@@ -30,7 +31,53 @@
                                         focus:ring-blue-600
                                     "
                                 />
-                                <div v-if="errors.employee_id">The ID is Required</div>
+                                <div v-if="errors.name">The ID is Required</div>
+                            </div>
+                            <div>
+                                <label for="title">password</label>
+                                <input
+                                    type="password"
+                                    v-model="form.password"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                            </div>
+                            <div>
+                                <label for="title">role</label>
+                                <select class="form-select block w-full mt-1" v-model="form.role_selected">
+                                    <option v-for="role in roles" v-bind:value="role.name">
+                                        {{role.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="title">user_id</label>
+                                <input
+                                    type="text"
+                                    v-model="form.user_id"
+                                    class="
+                                        w-full
+                                        px-4
+                                        py-2
+                                        mt-2
+                                        border
+                                        rounded-md
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-600
+                                    "
+                                />
+                                <div v-if="errors.user_id">The ID is Required</div>
                             </div>
                             <div class="mt-4">
                                 <label for="title">name_prefix</label>
@@ -410,7 +457,9 @@ export default {
     },
     setup() {
         const form = useForm({
-            employee_id: null,
+            name: null,
+            password: null,
+            user_id: null,
             name_prefix: null,
             first_name: null,
             middle_initial: null,
@@ -434,7 +483,7 @@ export default {
     },
     methods: {
         submit() {
-            this.form.post(route("employees.store"));
+            this.form.post(route("users.store"));
         },
     },
 };
